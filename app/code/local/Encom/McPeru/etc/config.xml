@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   	Payment
+ * @package    	Strobe_McPeru
+ * @copyright   Copyright (c) 2010 Strobe IT Team
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
+-->
+<config>
+    <modules>
+        <Strobe_McPeru>
+            <version>0.9</version>
+        </Strobe_McPeru>
+    </modules>
+    <global>
+        <models>
+            <mcperu>
+                <class>Strobe_McPeru_Model</class>
+                <!--<resourceModel>safetypay_mysql4</resourceModel>-->
+            </mcperu>
+            <!--<safetypay_mysql4>
+                <class>Mage_SafetyPay_Model_Mysql4</class>
+                <entities>
+                    <express_debug><table>safetypay_express_debug</table></express_debug>
+                </entities>
+            </safetypay_mysql4>-->
+        </models>
+        <!--<resources>
+            <safetypay_setup>
+                <setup>
+                    <module>Mage_SafetyPay</module>
+                    <class>Mage_SafetyPay_Model_Mysql4_Setup</class>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </safetypay_setup>
+            <safetypay_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </safetypay_write>
+            <safetypay_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </safetypay_read>
+        </resources>-->
+        <blocks>
+            <mcperu><class>Strobe_McPeru_Block</class></mcperu>
+        </blocks>
+        <helpers>
+            <mcperu><class>Strobe_McPeru_Helper</class></mcperu>
+        </helpers>
+        <sales>
+            <order>
+                <statuses>
+                    <payment_confirmed_mcperu translate="label"><label>Confirmed Payment by McPeru</label></payment_confirmed_mcperu>
+                </statuses>
+                <states>
+                    <processing>
+                        <statuses>
+                            <payment_confirmed_mcperu/>
+                        </statuses>
+                        <visible_on_front/>
+                    </processing>
+                </states>
+            </order>
+        </sales>
+        <payment>
+            <cc>
+                <types>
+                    <VI>
+                        <code>MC</code>
+                        <name>MasterCard</name>
+                        <order>60</order>
+                    </VI>
+                </types>
+            </cc>
+        </payment>
+        <!--<template>
+            <email>
+               <safetypay_paymentconfirmation>
+                   <label>SafetyPay payment confirmation email</label>
+                   <file>safetypay_paymentconfirmation.html</file>
+                   <type>html</type>
+               </safetypay_paymentconfirmation>
+            </email>
+        </template>-->
+    </global>
+    <frontend>
+        <routers>
+            <mcperu>
+                <use>standard</use>
+                <args>
+                    <module>Strobe_McPeru</module>
+                    <frontName>mcperu</frontName>
+                </args>
+            </mcperu>
+        </routers>
+        <!--<translate>
+            <modules>
+                <Mage_SafetyPay>
+                    <files>
+                        <default>Mage_SafetyPay.csv</default>
+                    </files>
+                </Mage_SafetyPay>
+            </modules>
+        </translate>-->
+        <layout>
+            <updates>
+                <mcperu>
+                    <file>mcperu.xml</file>
+                </mcperu>
+            </updates>
+        </layout>
+    </frontend>
+    <!--<adminhtml>
+        <translate>
+            <modules>
+                <Mage_SafetyPay>
+                    <files>
+                        <default>Mage_SafetyPay.csv</default>
+                    </files>
+                </Mage_SafetyPay>
+            </modules>
+        </translate>
+    </adminhtml>-->
+    <default>
+        <payment>
+            <mcperu_webpoint>
+                <active>0</active>
+                <title>MasterCard</title>
+                <cctypes>MC</cctypes>
+                <allowspecific>0</allowspecific>
+                <sort_order>0</sort_order>
+                <model>mcperu/webpoint</model>
+                <protocol>https</protocol>
+            </mcperu_webpoint>
+        </payment>
+    </default>
+</config>
